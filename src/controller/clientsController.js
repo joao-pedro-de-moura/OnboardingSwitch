@@ -1,5 +1,6 @@
-import ClientModel from "../model/clientsModel.js";
-import validation from "../validation/validation.js";
+
+const  ClientModel  = require('../model/clientsModel.js');
+
 const clientController = {
     async allClient(req, res) {
       try{
@@ -13,34 +14,26 @@ const clientController = {
 
     async oneClient(req, res) {
       try{
-          if(!await ClientModel.findByPk(req.params.id)){
-            return res.status(404).send("Client doesn't exists")
-            }
+        const client = await ClientModel.findByPk(req.params.id)
+        return res.json(client);
           }catch{
             res.status(404).send("Cients not found")
           }
-            const client = ClientModel.findByPk(req.params.id)
-            res.json(client);
       },
 
 
     async createClient(req, res){
       try{
-        // const clientId =  await ClientModel.findByPk(req.params.id)
-         //   if(clientId.email === req.body.email ){
-         //   return res.status(400).send("Client alredy exists")
-           //   }else{
-                    const name = req.body.name
-                    const email = req.body.email
-                    const password = req.body.password
-                    const client = await validation.createClient( name, email, password)
-                    res.status(200) 
-                    return  res.json(client)
-                //    }
+          const name = req.body.name
+          const email = req.body.email
+          const password = req.body.password
+          const client = await ClientModel.create( {name, email, password})
+            res.status(200) 
+            return  res.json(client)
       }catch(error){
-        const errors = error.errors.map(err => err.message);
-        res.status(400)   
-        return  res.json(errors)
+       const errors = error.errors.map(err => err.message);
+       res.status(400) 
+            return  res.json(errors) 
       }
     },
 
@@ -56,27 +49,24 @@ const clientController = {
             clients.password = password;
               await clients.save();
                 res.status(200).send("Client updated");
-          }catch(error){
-            const errors = error.errors.map(err => err.message);
-            res.status(400)   
-            return  res.json(errors)
+          }catch{res.status(400) 
+           /* const errors = error.errors.map(err => err.message);
+              
+            return  res.json(errors) */
           }
     },
 
 
     async deleteClient(req, res) {
       try{
-        if(!await ClientModel.findByPk(req.params.id)){
-            res.status(404).send("Client not found")
-          }else{
-            const clients = ClientModel.findByPk(req.params.id)
+            const clients = await ClientModel.findByPk(req.params.id)
             await clients.destroy();
-            res.status(200).send("Client deleted");
-        }
+          return  res.status(200).send("Client deleted");
+        
       }catch{
         res.status(404).send("Cients not found")
       }
     }
 }
 
-export default clientController;
+module.exports = clientController

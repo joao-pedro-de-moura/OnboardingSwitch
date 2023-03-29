@@ -1,8 +1,13 @@
-import Sequelize from 'sequelize'
-import connection from "../database/connection.js";
+
+
+const { Sequelize } = require('sequelize');
+const sequelize = new Sequelize('Users', 'postgres', '1234', {
+  host : 'localhost',
+  dialect:  'postgres'
+});
       
 
-const clientsModal = connection.define('clients', {
+const clientsModal = sequelize.define('users', {
   name: {
     type: Sequelize.STRING,
     allowNull: false,
@@ -45,6 +50,14 @@ const clientsModal = connection.define('clients', {
   
 
 },{
-  timestamps: false});
+  timestamps: false,
+  indexes: [
+    {
+      unique: true,
+      fields: ['email']
+    }
+  ]
 
-export default clientsModal
+});
+
+module.exports = clientsModal 

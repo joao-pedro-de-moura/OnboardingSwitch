@@ -1,5 +1,6 @@
-import require from 'express'
-import clientController from '../controller/clientsController.js'
+
+
+const  clientController  = require('../controller/clientsController.js');
 
 
 const router = (app) =>{
@@ -11,4 +12,4 @@ app.delete('/clients/:id', clientController.deleteClient);
 
 }
 
-export default router
+module.exports = router

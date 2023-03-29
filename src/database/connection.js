@@ -1,3 +1,4 @@
+/*
 import Sequelize from 'sequelize'
 
       const connection = new Sequelize('Clients', 'postgres', '1234', {
@@ -7,3 +8,5 @@ import Sequelize from 'sequelize'
 
 
       export default connection
+
+      */
