@@ -2,7 +2,6 @@
   "name": "projetoestag",
   "version": "1.0.0",
   "description": "Projeto de avaliação de Junior para Switch",
-  
   "main": "index.js",
   "scripts": {
     "start": "node ./src/app.js",
@@ -20,8 +19,11 @@
   },
   "homepage": "https://github.com/joao-pedro-de-moura/ProjetoEstagio#readme",
   "dependencies": {
+    "bcrypt": "^5.1.0",
+    "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.0",
     "pg": "^8.10.0",
     "pg-hstore": "^2.3.4",
     "sequelize": "^6.30.0"
