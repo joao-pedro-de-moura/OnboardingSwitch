@@ -18,6 +18,7 @@ const clientController = {
         }
         const {id} = user
           const token = jwt.sign({id, email}, "efmjnakljfnkef")
+          console.log(req)
       return res.json(token)
         }catch{
           res.status(404).send("Cients not found")
