@@ -1,6 +1,8 @@
 const  jwt  = require('jsonwebtoken');
+const clientsModal = require('../model/clientsModel');
 
-module.exports = (req, res, next) =>{
+module.exports = async (req, res, next) =>{
+   
     const {authorization} = req.headers
 
     if(!authorization){
@@ -11,12 +13,25 @@ module.exports = (req, res, next) =>{
 
     try{
         data = jwt.verify(token, "efmjnakljfnkef")
-        const {id, email} = data
-        req.id =id
-        req.email = email
+        const {id} = data
+        console.log(req.params)
+        const user = await clientsModal.findOne({
+            where:{
+                id
+            }
+        
+        })
+      
+        if(!user){
+            return res.status(401).json({
+                erros: ['Token invalid']
+            })
+        }
         return next()
     }catch{
-        res.status(401).send("Login error")
+        return res.status(401).json({
+            erros: ['Login Failed']
+        })
     }
 
 }

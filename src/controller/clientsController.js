@@ -2,24 +2,22 @@
 const  jwt  = require('jsonwebtoken');
 const  ClientModel  = require('../model/clientsModel.js');
 
+
 const clientController = {
 
   async auth(req, res) {
     try{
       const email = req.body.email
       const password = req.body.password
-          if(!password && !email){
-              res.status(404).send("Login incorrect")
-            }
-
       const user = await ClientModel.findOne({where:{email} })
-        if(!user){
-          res.status(404).send("user doesn't exist")
-        }
+      if(password != user.password){
+        return res.status(401).json({
+          erros: ['Token invalid']
+        })  
+      }
         const {id} = user
           const token = jwt.sign({id, email}, "efmjnakljfnkef")
-          console.log(req)
-      return res.json(token)
+      return res.json({token, user})
         }catch{
           res.status(404).send("Cients not found")
         }
@@ -54,9 +52,8 @@ const clientController = {
             res.status(200) 
             return  res.json(client)
       }catch(error){
-       const errors = error.errors.map(err => err.message);
-       res.status(400) 
-            return  res.json(errors) 
+        const errors = error.errors.map(err => err);
+        return  res.status(400).send(errors)
       }
     },
 
@@ -65,17 +62,15 @@ const clientController = {
       try{
           const name = req.body.name
           const email = req.body.email
-          const password = req.body.password
           const clients = await ClientModel.findByPk(req.params.id);
             clients.name = name;
             clients.email = email;
-            clients.password = password;
               await clients.save();
                 res.status(200).send("Client updated");
-          }catch(error){res.status(400) 
-            const errors = error.errors.map(err => err.message);
-            res.status(400) 
-                 return  res.json(errors) 
+          }catch(error){
+            const errors = error.errors.map(err => err);
+          return  res.status(400).send(errors)
+                    
           }
     },
 
