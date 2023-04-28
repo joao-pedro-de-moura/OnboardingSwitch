@@ -1,24 +1,29 @@
 
 const  jwt  = require('jsonwebtoken');
 const  ClientModel  = require('../model/clientsModel.js');
-
+const bcrypt = require('bcryptjs');
 
 const clientController = {
 
   async auth(req, res) {
     try{
+      
       const email = req.body.email
-      const password = req.body.password
+      const password= req.body.password
       const user = await ClientModel.findOne({where:{email} })
-      if(password != user.password){
+     
+      const compare = bcrypt.compareSync(password, user.password)
+      if(!compare){
         return res.status(401).json({
-          erros: ['Token invalid']
-        })  
+          erros: ['Login Failed']
+      })
       }
+    
         const {id} = user
           const token = jwt.sign({id, email}, "efmjnakljfnkef")
-      return res.json({token, user})
+            return res.json({token, user})
         }catch{
+          
           res.status(404).send("Cients not found")
         }
     },
@@ -65,6 +70,7 @@ const clientController = {
           const clients = await ClientModel.findByPk(req.params.id);
             clients.name = name;
             clients.email = email;
+            
               await clients.save();
                 res.status(200).send("Client updated");
           }catch(error){

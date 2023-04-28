@@ -1,7 +1,8 @@
 const bcrypt = require('bcryptjs');
 const { Sequelize } = require('sequelize');
-const sequelize = new Sequelize('Users', 'postgres', '1234', {
-  host : 'localhost',
+const profileModel = require('./profileModel')
+const sequelize = new Sequelize('vpc_db', 'postgres', '12345678', {
+  host : 'database-1.cgzj0qrf0og8.sa-east-1.rds.amazonaws.com',
   dialect:  'postgres'
 });
       
@@ -59,6 +60,7 @@ const clientsModal = sequelize.define('users', {
     }
   },
 
+
   timestamps: false,
   indexes: [
     {
@@ -66,11 +68,12 @@ const clientsModal = sequelize.define('users', {
       fields: ['email']
     }
   ],
- 
+    
 },
 
 
 )
 
+clientsModal.hasOne(profileModel, { foreignKey: 'user_id' });
 
 module.exports = clientsModal 

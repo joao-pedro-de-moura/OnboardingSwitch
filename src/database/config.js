@@ -1,10 +1,10 @@
 module.exports = { 
     dialect : 'postgres',
-     host : 'localhost',
+     host : 'database-1.cgzj0qrf0og8.sa-east-1.rds.amazonaws.com',
      port : '5432',
-     password : '1234',
+     password : '12345678',
      user : 'postgres',
-     database : 'Users',
+     database : 'vpc_db',
      define : {
         timestamps: false
     }
