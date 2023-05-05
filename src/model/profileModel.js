@@ -1,18 +1,19 @@
 const { Sequelize } = require('sequelize');
-const  ClientModel  = require('./clientsModel');
-const sequelize = new Sequelize('vpc_db', 'postgres', '12345678', {
-  host : 'database-1.cgzj0qrf0og8.sa-east-1.rds.amazonaws.com',
-  dialect:  'postgres'
+
+const clientsModel = require('./clientsModel');
+const sequelize = new Sequelize('Users', 'postgres', '1234', {
+    host : 'localhost',
+    dialect:  'postgres'
 });
       
 
-const profileModal = sequelize.define('profiles', {
+const profileModel = sequelize.define('profiles', {
     originalname: {
         type: Sequelize.STRING,
         allowNull: false,
         validate: {
           notNull: {
-              msg: 'Preencha o campo corretamente'
+              msg: 'Preencha o campo originalname corretamente'
           },
           notEmpty: {
               msg: 'Preencha o campo'
@@ -24,17 +25,23 @@ const profileModal = sequelize.define('profiles', {
        allowNull: false,
        validate: {
         notNull: {
-            msg: 'Preencha o campo corretamente'
+            msg: 'Preencha o campo filename corretamente'
         },
         notEmpty: {
             msg: 'Preencha o campo'
         }
     }
       },
+      url:{
+        type : Sequelize.STRING,
+        allowNull: true,
+      },
+      
     
     },
     {timestamps: false}
 )
 
 
-module.exports = profileModal 
+
+module.exports = profileModel 

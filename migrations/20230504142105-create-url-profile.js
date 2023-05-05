@@ -5,9 +5,11 @@ module.exports = {
   async up (queryInterface, Sequelize) {
     return queryInterface.sequelize.transaction(t => {
       return Promise.all([
+        queryInterface.addColumn('profiles', 'url',{
+          type: Sequelize.DataTypes.STRING,
+          allowNull: false,
+        }, { transaction: t }),
        
-        queryInterface.removeColumn('profiles', 'createdAt', { transaction: t }),
-        queryInterface.removeColumn('profiles', 'updatedAt', { transaction: t })
       ]);
     });
   },

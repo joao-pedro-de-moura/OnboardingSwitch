@@ -1,6 +1,7 @@
 
 const  jwt  = require('jsonwebtoken');
 const  ClientModel  = require('../model/clientsModel.js');
+const profileModel = require('../model/profileModel.js')
 const bcrypt = require('bcryptjs');
 
 const clientController = {
@@ -30,7 +31,10 @@ const clientController = {
 
     async allClient(req, res) {
       try{
-        const client = await ClientModel.findAll();
+        const client = await ClientModel.findAll({
+          order: [['id', 'DESC'], [profileModel, 'id', 'DESC']],
+          include: {model: profileModel}
+        });
         res.json(client);
       }catch(error){
         res.status(404).send("There are no clients")
@@ -40,7 +44,9 @@ const clientController = {
 
     async oneClient(req, res) {
       try{
-        const client = await ClientModel.findByPk(req.params.id)
+        const client = await ClientModel.findByPk(req.params.id, {
+          order: [['id', 'DESC'], [profileModel, 'id', 'DESC']],
+          include: {model: profileModel}})
         return res.json(client);
           }catch{
             res.status(404).send("Cients not found")

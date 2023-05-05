@@ -2,7 +2,7 @@
 const  reqLogin  = require('../middleware/reqLogin.js');
 const  clientController  = require('../controller/clientsController.js');
 const  imageController = require('../controller/profileController.js');
-
+const upload = require('../config/multerConfig')
 
 const router = (app) =>{
 app.get('/clients', clientController.allClient)
