@@ -2,6 +2,7 @@ const multer = require('multer')
 const multerConfig = require('../config/multerConfig')
 const upload = multer(multerConfig).single('foto')
 const profileModel = require('../model/profileModel')
+const { where } = require('sequelize')
 
 const imageController = {
     
@@ -28,7 +29,23 @@ const imageController = {
         })
 
     
-        }
+        },
+
+        async deleteProfile(req, res) {
+            try{
+                    const id= req.params.id
+                   
+               
+                  await profileModel.destroy({where:{
+                    user_id: id
+                  } });
+                return  res.status(200).send("Client deleted");
+              
+            }catch{
+                res.status(404).send("Cients not found")
+                
+            }
+          }
     }
 
 module.exports = imageController
