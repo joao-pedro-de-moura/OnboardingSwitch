@@ -11,6 +11,7 @@ app.post('/clients', clientController.createClient)
 app.post('/auth', clientController.auth)
 app.post('/', imageController.store)
 app.put('/clients/:id', clientController.updateClient)
+app.put('/clients/:id', clientController.updateClientPassword)
 app.delete('/clients/:id', clientController.deleteClient);
 app.delete('/clients/profile/:id', imageController.deleteProfile);
 }

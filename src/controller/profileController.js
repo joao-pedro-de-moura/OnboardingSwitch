@@ -2,7 +2,7 @@ const multer = require('multer')
 const multerConfig = require('../config/multerConfig')
 const upload = multer(multerConfig).single('foto')
 const profileModel = require('../model/profileModel')
-const { where } = require('sequelize')
+
 
 const imageController = {
     

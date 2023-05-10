@@ -1,10 +1,14 @@
 const bcrypt = require('bcryptjs');
 const { Sequelize } = require('sequelize');
 const profileModel = require('./profileModel')
-const sequelize = new Sequelize('Users', 'postgres', '1234', {
-  host : 'localhost',
-  dialect:  'postgres'
+const sequelize = new Sequelize('db_teste', 'db_aws', '12345678', {
+  host : 'database-2.coe0sqerpl7i.sa-east-1.rds.amazonaws.com',
+  dialect:  'postgres',
+  port: '5433'
 });
+
+
+
 
 const clientsModel = sequelize.define('users', {
   name: {
@@ -48,7 +52,7 @@ const clientsModel = sequelize.define('users', {
   }
  
   },
-  
+ 
 
 },{   
   hooks: {
@@ -56,7 +60,10 @@ const clientsModel = sequelize.define('users', {
       if(user.password){
         user.password = await bcrypt.hash(user.password, 8);
       }
-    }
+    },
+  
+    
+  
   },
 
 

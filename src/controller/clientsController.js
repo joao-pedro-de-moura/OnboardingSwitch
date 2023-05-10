@@ -63,7 +63,7 @@ const clientController = {
             res.status(200) 
             return  res.json(client)
       }catch(error){
-        const errors = error.errors.map(err => err);
+        const errors = error.errors
         return  res.status(400).send(errors)
       }
     },
@@ -78,6 +78,27 @@ const clientController = {
             clients.email = email;
             
               await clients.save();
+                res.status(200).send("Client updated");
+          }catch(error){
+            const errors = error.errors.map(err => err);
+          return  res.status(400).send(errors)
+                    
+          }
+    },
+
+    async updateClientPassword(req, res) {
+      try{
+        const password = req.body.password
+        const NewPassword1 = req.body.password1
+        const NewPassword2 = req.body.password2
+          const clients = await ClientModel.findByPk(req.params.id);
+          if(NewPassword1 === NewPassword2){
+            next()
+          }
+          if(password === clients.password){
+            clients.password = await bcrypt.hash(NewPassword1, 8)
+            await clients.save();
+          }
                 res.status(200).send("Client updated");
           }catch(error){
             const errors = error.errors.map(err => err);
