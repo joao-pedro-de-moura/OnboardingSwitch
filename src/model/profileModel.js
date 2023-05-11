@@ -47,4 +47,3 @@ const profileModel = sequelize.define('profiles', {
 
 module.exports = profileModel
 
-module.exports = sequelize
