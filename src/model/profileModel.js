@@ -1,11 +1,13 @@
 const { Sequelize } = require('sequelize');
 
-const clientsModel = require('./clientsModel');
-const sequelize = new Sequelize('db_teste', 'db_aws', '12345678', {
-    host : 'database-2.coe0sqerpl7i.sa-east-1.rds.amazonaws.com',
-    dialect: 'postgres',
-    port: '5433'
+
+const sequelize = new Sequelize('db_teste', 'teste', '12345678', {
+  host : 'teste.ccb2gvbkuq38.sa-east-1.rds.amazonaws.com',
+  dialect: 'postgres',
+  port: '5432'
   });
+
+  
 
 
 const profileModel = sequelize.define('profiles', {

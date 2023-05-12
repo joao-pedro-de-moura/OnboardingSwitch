@@ -1,26 +1,26 @@
 module.exports = {
   "development": {
-    "username": "db_aws",
+    "username": "teste",
     "password": "12345678",
     "database": "db_teste",
-    "host": "database-2.coe0sqerpl7i.sa-east-1.rds.amazonaws.com",
-    'port': '5433',
+    "host": "teste.ccb2gvbkuq38.sa-east-1.rds.amazonaws.com",
+    "port": "5432",
     "dialect": "postgres"
   },
   "test": {
-    "username": "db_aws",
+    "username": "teste",
     "password": "12345678",
     "database": "db_teste",
-    'port': '5433',
-    "host": "database-2.coe0sqerpl7i.sa-east-1.rds.amazonaws.com",
+    "host": "teste.ccb2gvbkuq38.sa-east-1.rds.amazonaws.com",
+    "port": "5432",
     "dialect": "postgres"
   },
   "production": {
-    "username": "db_aws",
+    "username": "teste",
     "password": "12345678",
     "database": "db_teste",
-    'port': '5433',
-    "host": "database-2.coe0sqerpl7i.sa-east-1.rds.amazonaws.com",
+    "host": "teste.ccb2gvbkuq38.sa-east-1.rds.amazonaws.com",
+    "port": "5432",
     "dialect": "postgres"
   }
 }

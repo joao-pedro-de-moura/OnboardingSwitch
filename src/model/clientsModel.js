@@ -1,10 +1,10 @@
 const bcrypt = require('bcryptjs');
 const { Sequelize } = require('sequelize');
 const profileModel = require('./profileModel')
-const sequelize = new Sequelize('db_teste', 'db_aws', '12345678', {
-  host : 'database-2.coe0sqerpl7i.sa-east-1.rds.amazonaws.com',
-  dialect:  'postgres',
-  port: '5433'
+const sequelize = new Sequelize('db_teste', 'teste', '12345678', {
+  host : 'teste.ccb2gvbkuq38.sa-east-1.rds.amazonaws.com',
+  dialect: 'postgres',
+  port: '5432'
 });
 
 
@@ -84,4 +84,3 @@ clientsModel.hasMany(profileModel, { foreignKey: 'user_id' });
 
 module.exports = clientsModel 
 
-module.exports = sequelize 
