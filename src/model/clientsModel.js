@@ -83,4 +83,4 @@ clientsModel.hasMany(profileModel, { foreignKey: 'user_id' });
 
 
 module.exports = clientsModel 
-
+module.exports = sequelize
