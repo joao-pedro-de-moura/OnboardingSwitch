@@ -40,7 +40,7 @@ const clientController = {
           order: [['id', 'DESC'], [profileModel, 'id', 'DESC']],
           include: {model: profileModel}
         });
-        res.json(client);
+        res.status(200).json(client);
       }catch(error){
         res.status(404).send("There are no clients")
       }  
