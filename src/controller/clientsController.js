@@ -6,6 +6,11 @@ const bcrypt = require('bcryptjs');
 
 const clientController = {
 
+
+  async success(req, res) {
+      return res.status(200)
+  },
+
   async auth(req, res) {
     try{
       
