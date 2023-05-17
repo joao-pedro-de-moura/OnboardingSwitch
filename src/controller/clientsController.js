@@ -93,7 +93,7 @@ const clientController = {
 
     async updateClientPassword(req, res) {
       try{
-        const password = req.body.password
+        const password = bcrypt.hash(req.body.password, 8)
         const NewPassword1 = req.body.password1
         const NewPassword2 = req.body.password2
           const clients = await ClientModel.findByPk(req.params.id);

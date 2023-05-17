@@ -16,10 +16,10 @@ const clientsModel = sequelize.define('users', {
     allowNull: false,
     validate: {
       notNull: {
-          msg: 'Please provide a value for Name'
+          msg: 'Por favor, insira um nome'
       },
       notEmpty: {
-          msg: 'Please provide a value for Name'
+          msg: 'Por favor, insira um nome'
       }
   }
   },
@@ -28,10 +28,10 @@ const clientsModel = sequelize.define('users', {
    allowNull: false,
    validate: {
     notNull: {
-        msg: 'Please provide a not null value for Password'
+        msg: 'Por favor, insira uma senha'
     },
     notEmpty: {
-        msg: 'Please provide a value for Password'
+        msg: 'Por favor, insira uma senha'
     }
 }
   },
@@ -44,10 +44,10 @@ const clientsModel = sequelize.define('users', {
     unique: true,
     validate: {
       notNull: {
-          msg: 'Please provide a value for Email'
+          msg: 'Por favor, insira um email'
       },
       notEmpty: {
-          msg: 'Please provide a value for Email'
+          msg: 'Por favor, insira um email'
       },
   }
  
