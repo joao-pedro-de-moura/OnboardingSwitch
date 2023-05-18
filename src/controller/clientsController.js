@@ -42,7 +42,7 @@ const clientController = {
         });
         res.status(200).json(client);
       }catch(error){
-        res.status(404).send("There are no clients")
+        res.status(404).send("Clientes não encontrados")
       }  
     },
 
@@ -54,7 +54,7 @@ const clientController = {
           include: {model: profileModel}})
         return res.json(client);
           }catch{
-            res.status(404).send("Cients not found")
+            res.status(404).send("Cliente não encontrado")
           }
       },
 
@@ -81,11 +81,10 @@ const clientController = {
           const clients = await ClientModel.findByPk(req.params.id);
             clients.name = name;
             clients.email = email;
-            
-              await clients.save();
-                res.status(200).send("Client updated");
+            await clients.save();
+            res.status(200).send("Cliente atualizado");
           }catch(error){
-            const errors = error.errors.map(err => err);
+          const errors = error.errors.map(err => err);
           return  res.status(400).send(errors)
                     
           }
@@ -93,23 +92,23 @@ const clientController = {
 
     async updateClientPassword(req, res) {
       try{
-        const password = bcrypt.hash(req.body.password, 8)
-        const NewPassword1 = req.body.password1
-        const NewPassword2 = req.body.password2
-          const clients = await ClientModel.findByPk(req.params.id);
-          if(NewPassword1 === NewPassword2){
-            next()
+        const password = req.body.password
+        const NewPassword = req.body.newPassword
+        const clients = await ClientModel.findByPk(req.params.id);
+        const compare = bcrypt.compareSync(password, clients.password)
+          if(!compare){
+            return res.status(401).json({
+              erros: ['Senha incorreta']
+            })
           }
-          if(password === clients.password){
-            clients.password = await bcrypt.hash(NewPassword1, 8)
+          clients.password = await bcrypt.hash(NewPassword, 8)
             await clients.save();
-          }
-                res.status(200).send("Client updated");
-          }catch(error){
-            const errors = error.errors.map(err => err);
-          return  res.status(400).send(errors)
-                    
-          }
+            return   res.status(200).send("Senha atualizada");
+        }catch{
+            return res.status(401).json({
+              erros: ['Senha incorretaaaaaa']
+            })
+        }
     },
 
 
