@@ -35,6 +35,11 @@ const clientsModel = sequelize.define('users', {
     }
 }
   },
+  is_admin: {
+    type: Sequelize.BOOLEAN,
+    notEmpty: true, 
+    allowNull: false,
+  },
 
   
   email: {

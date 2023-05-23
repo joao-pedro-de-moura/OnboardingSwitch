@@ -64,11 +64,17 @@ const clientController = {
           const name = req.body.name
           const email = req.body.email
           const password = req.body.password
-          const client = await ClientModel.create( {name, email, password})
+          let is_admin = false;
+
+          if (req.body.is_admin) {
+            is_admin = true;
+          }
+           const client = await ClientModel.create( {name, email, password, is_admin})
             res.status(200) 
             return  res.json(client)
       }catch(error){
         const errors = error.errors
+        console.log(req.body)
         return  res.status(400).send(errors)
       }
     },
